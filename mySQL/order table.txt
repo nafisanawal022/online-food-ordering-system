@@ -1,0 +1,23 @@
+create databse project;
+use project;
+
+create table orders(order_id int not null, u_id integer, price double, order_date date, quantity int not null, address varchar(200), order_status varchar(200), order_queue int, primary key(order_id), foreign key (u_id) references USER(USER_ID) on update cascade on delete cascade);
+create table food_cart(o_id int, i_code varchar(100), primary key(o_id,i_code), foreign key (o_id) references orders(order_id), foreign key (i_code) references food_item(Item_code));
+create table update_view(admin_id integer, ord_id int, primary key (admin_id,ord_id), foreign key (admin_id) references admin(ID), foreign key (ord_id) references orders(order_id));
+
+create table admin (NAME VARCHAR(10) NOT NULL, ADDRESS VARCHAR(20) NOT NULL, USERNAME VARCHAR(20) NOT NULL, PASSWORD VARCHAR(30) NOT NULL, ID INTEGER NOT NULL, NID_NO INTEGER NOT NULL,PHONE_NO INTEGER NOT NULL, PRIMARY KEY (ID), UNIQUE (NID_NO),UNIQUE(PHONE_NO));
+INSERT INTO ADMIN VALUES ("admin","house-1B,dhaka","admin@12345",'12345',1,5467235678,01625372932);
+create table payment(payment_method varchar(200), amount double, order_id varchar(200), primary key (amount,order_id), foreign key (order_id) references orders(order_id) on update cascade on delete cascade);
+CREATE TABLE CART (ID INTEGER NOT NULL AUTO_INCREMENT, USER_ID INTEGER NOT NULL,ITEM_ID INTEGER NOT NULL, QUANTITY INTEGER NOT NULL , PRIMARY KEY (ID));
+create table USER (USER_ID INTEGER NOT NULL AUTO_INCREMENT, ADDRESS VARCHAR(20) NOT NULL, NAME VARCHAR(20) NOT NULL, PHONE_NO integer NOT NULL, PASSWORD VARCHAR(30) NOT NULL, EMAIL VARCHAR(15) NOT NULL, PRIMARY KEY (USER_ID), UNIQUE (PHONE_NO), UNIQUE(EMAIL));
+
+CREATE TABLE VIEW (U_ID INTEGER NOT NULL, I_CODE VARCHAR(100) NOT NULL, PRIMARY KEY (U_ID, I_CODE), FOREIGN KEY (U_ID) REFERENCES USER(USER_ID), FOREIGN KEY (I_CODE) REFERENCES food_item(Item_code));
+create table food_item(Food_name varchar(200),Item_code varchar(100),Category varchar(200),Price double,primary key(Item_code));
+
+insert into food_item values('Chicken Cheese Burger','ccb1','Burger',220),('Beef Cheese Burger','bcb1','Burger',220),('BBQ Chicken Burger','bbqc2','Burger',200),
+('BBQ Beef Burger','bbqb2','Burger',200),('Coca Cola','dc1','Drinks',35),('Fanta','df2','Drinks',35),('Sprite','ds3','Drinks',35),('Fresh Water','dw4','Drinks',20),
+('French Fry','fr1','Fries',80),('Onion Ring','fr2','Fries',90),('Coleslaw','s1','Salad',50),('Cookie Salad','s2','Salad',115);
+insert into user values(123,'green road','ahmed',0123443,'12345','ahmed@gmail.com');
+insert into user values(124,'green road','jack',0123453,'1234345','jack@gmail.com');
+insert into orders values(2,124,40,'2022-01-02',2,'green road','pending', 13);
+insert into orders values(1,123,25,'2022-01-02,2','green road','pending', 12);

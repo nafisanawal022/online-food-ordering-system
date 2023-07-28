@@ -1,0 +1,11 @@
+create database Project;
+use Project;
+
+
+create table food_item(Food_name varchar(200),Item_code varchar(100),Category varchar(200),Price double,primary key(Item_code));
+
+insert into food_item values('Chicken Cheese Burger','ccb1','Burger',220),('Beef Cheese Burger','bcb1','Burger',220),('BBQ Chicken Burger','bbqc2','Burger',200),
+('BBQ Beef Burger','bbqb2','Burger',200),('Coca Cola','dc1','Drinks',35),('Fanta','df2','Drinks',35),('Sprite','ds3','Drinks',35),('Fresh Water','dw4','Drinks',20),
+('French Fry','fr1','Fries',80),('Onion Ring','fr2','Fries',90),('Coleslaw','s1','Salad',50),('Cookie Salad','s2','Salad',115);
+
+ALTER TABLE food_item ADD Serial INT NOT NULL AUTO_INCREMENT FIRST, ADD UNIQUE (Serial);
